@@ -17,7 +17,7 @@ class LinkedList:
 
         return f'LinkedList({data})'
 
-    def insert(self, data, pos=1):
+    def insert(self, data, pos=0):
         node = Node(data)
 
         # insert head
@@ -26,7 +26,7 @@ class LinkedList:
             return
 
         # insert at beginning
-        if pos <= 1:
+        if pos <= 0:
             node.next = self.head
             self.head = node
             return
@@ -34,15 +34,13 @@ class LinkedList:
         # insert at n
         prev = self.head
         i=0
-        while i < pos-2 and prev.next:
+        while i <= pos-2 and prev.next:
             prev = prev.next
             i = i+1
 
         node.next = prev.next
         prev.next = node
 
-    def remove(self):
-        pass
 
     def print(self):
         pass
