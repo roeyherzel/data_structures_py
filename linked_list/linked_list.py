@@ -38,14 +38,33 @@ class LinkedList:
             prev = prev.next
             i = i+1
 
+        if not prev.next:
+            raise IndexError(f'Could not find node at position {pos}')
+
         node.next = prev.next
         prev.next = node
 
-    def remove(self):
-        pass
+    def delete(self, pos=1):
+        # remove at beginning
+        if pos <= 1:
+            head = self.head.next
+            self.head = head
+            return
 
-    def print(self):
-        pass
+        # remove at n
+        prev = self.head
+        i=0
+        while i < pos-2 and prev.next:
+            prev = prev.next
+            i = i+1
+
+        if not prev.next:
+            raise IndexError(f'Could not find node at position {pos}')
+
+        curr = prev.next
+        prev.next = curr.next
+
+        del curr
 
     def reverse(self):
         pass
