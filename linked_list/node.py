@@ -4,4 +4,4 @@ class Node:
         self.next = None
 
     def __repr__(self):
-        return f'Node(data={self.data}, next={self.next})'
+        return f'Node(data={self.data}, next=<{self.__hash__()}>)'
