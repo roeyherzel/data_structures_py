@@ -67,4 +67,14 @@ class LinkedList:
         del curr
 
     def reverse(self):
-        pass
+        prev = None
+        node = self.head
+
+        while node:
+            _next = node.next
+            node.next = prev
+
+            prev = node
+            node = _next
+
+        self.head = prev
