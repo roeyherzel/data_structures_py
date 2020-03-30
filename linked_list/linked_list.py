@@ -78,3 +78,18 @@ class LinkedList:
             node = _next
 
         self.head = prev
+
+    def reverseV2(self):
+        self.head = reversive(self.head)
+
+
+def reversive(node):
+    if not node.next:
+        return node
+
+    head = reversive(node.next)
+    q = node.next
+    q.next = node
+    node.next = None
+
+    return head
