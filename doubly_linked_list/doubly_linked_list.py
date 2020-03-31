@@ -55,8 +55,22 @@ class DoublyLinkedList:
         new_node.prev = node
         new_node.next = next_n
 
-    def delete(self, data):
-        pass
+    def delete(self):
+        """
+        30->20->10
+        20->10
+        """
+        if not self.head:
+            return
+
+        if not self.head.next:
+            self.head = None
+            return
+
+        new_head = self.head.next
+        new_head.prev = None
+
+        self.head = new_head
 
     def reverse(self):
         pass
