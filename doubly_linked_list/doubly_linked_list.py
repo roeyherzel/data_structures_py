@@ -55,11 +55,7 @@ class DoublyLinkedList:
         new_node.prev = node
         new_node.next = next_n
 
-    def delete(self):
-        """
-        30->20->10
-        20->10
-        """
+    def delete(self, index=0):
         if not self.head:
             return
 
@@ -67,10 +63,29 @@ class DoublyLinkedList:
             self.head = None
             return
 
-        new_head = self.head.next
-        new_head.prev = None
+        # delete at beginning
+        if index <= 0:
+            new_head = self.head.next
+            new_head.prev = None
+            self.head = new_head
+            return
 
-        self.head = new_head
+        # delete at index
+        curr = self.head
+        i=0
+        while i < index and curr.next:
+            curr = curr.next
+            i = i + 1
+
+        if i != index:
+            raise IndexError('node index out of range')
+
+        before = curr.prev
+        after = curr.next
+
+        before.next = after
+        if after:
+            after.prev = before
 
     def reverse(self):
         pass
