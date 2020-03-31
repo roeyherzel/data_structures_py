@@ -4,9 +4,9 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
-    def __repr__(self):
+    def __str__(self):
         if not self.head:
-            return 'LinkedList()'
+            return ''
 
         node = self.head
         data = str(node.data)
@@ -15,8 +15,9 @@ class LinkedList:
             node = node.next
             data = f'{data} -> {node.data}'
 
-        return f'LinkedList({data})'
+        return data
 
+    # TODO: change pos to index starting 0
     def insert(self, data, pos=1):
         node = Node(data)
 
@@ -44,6 +45,7 @@ class LinkedList:
         node.next = prev.next
         prev.next = node
 
+    # TODO: change pos to index starting 0
     def delete(self, pos=1):
         # remove at beginning
         if pos <= 1:
