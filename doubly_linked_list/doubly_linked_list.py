@@ -88,4 +88,35 @@ class DoublyLinkedList:
             after.prev = before
 
     def reverse(self):
-        pass
+        curr = self.head
+
+        while curr.next:
+            p = curr.prev
+            n = curr.next
+
+            curr.next = p
+            curr.prev = n
+
+            curr = n
+
+        self.head = curr
+        self.head.next = curr.prev
+        self.head.prev = None
+
+    def reverseV2(self):
+        new_head = reversive(self.head)
+        self.head = new_head
+
+def reversive(node, prev=None):
+    if not node:
+        return prev
+
+    head = reversive(node.next, node)
+
+    n = node.next
+    p = node.prev
+
+    node.next = p
+    node.prev = n
+
+    return head
