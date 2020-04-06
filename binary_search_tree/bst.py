@@ -5,13 +5,12 @@ class BST:
         self.root = None
 
     def insert(self, data):
-        self.root = insert(self.root, data)
+        self.root = _insert(self.root, data)
 
     def search(self, data):
-        return search(self.root, data)
+        return _search(self.root, data)
 
-
-def insert(node, data):
+def _insert(node, data):
     if not node:
         node = Node(data)
 
@@ -22,7 +21,7 @@ def insert(node, data):
 
     return node
 
-def search(node, data):
+def _search(node, data):
     if not node:
         return False
 
@@ -33,3 +32,16 @@ def search(node, data):
         return search(node.left, data)
 
     return search(node.right, data)
+
+
+def find_min(self):
+    # TODO
+    raise NotImplemented
+
+def find_max(self):
+    # TODO
+    raise NotImplemented
+
+def find_height(node):
+    # TODO
+    raise NotImplemented
