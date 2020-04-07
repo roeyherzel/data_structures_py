@@ -27,6 +27,15 @@ class TestEnqueue:
         assert queue.is_empty is False
         assert queue.peek() == 10
 
+    def test_enqueue_after_dequeue_last(self):
+        queue = Queue()
+        queue.enqueue(10)
+        queue.dequeue()
+        queue.enqueue(20)
+
+        assert queue.is_empty is False
+        assert queue.peek() is 20
+
 class TestDequeue:
     def test_dequeue(self):
         queue = Queue()

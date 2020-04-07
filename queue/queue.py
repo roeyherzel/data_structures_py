@@ -13,7 +13,7 @@ class Queue:
     def enqueue(self, data):
         node = Node(data)
 
-        if not self.front and not self.rear:
+        if self.is_empty:
             self.front = self.rear = node
             return
 
@@ -24,13 +24,19 @@ class Queue:
         if self.is_empty:
             raise Exception("queue is empty")
 
+        # last item
+        if self.front == self.rear:
+            data = self.front.data
+            self.front = self.rear = None
+            return data
+
         data = self.front.data
         self.front = self.front.next
         return data
 
     @property
     def is_empty(self):
-        return self.front is None
+        return self.front is None and self.rear is None
 
     def peek(self):
         if self.is_empty:
