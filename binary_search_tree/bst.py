@@ -15,9 +15,9 @@ def _insert(node, data):
         node = Node(data)
 
     elif data <= node.data:
-        node.left = insert(node.left, data)
+        node.left = _insert(node.left, data)
     else:
-        node.right = insert(node.right, data)
+        node.right = _insert(node.right, data)
 
     return node
 
@@ -29,9 +29,9 @@ def _search(node, data):
         return True
 
     if data <= node.data:
-        return search(node.left, data)
+        return _search(node.left, data)
 
-    return search(node.right, data)
+    return _search(node.right, data)
 
 
 def find_min(self):
