@@ -1,5 +1,5 @@
 from pytest import fixture
-from .bst import BST, find_min, find_max, find_height
+from .bst import BST, find, find_min, find_max, find_height
 
 
 @fixture
@@ -84,11 +84,73 @@ class TestSearch:
         assert bst.search(6) is False
 
 
+class TestDelete:
+    def get_tree(self):
+        bst = BST()
+        for i in [12,5,15,3,7,13,17,1,9,14,20,8,11,18]:
+            bst.insert(i)
+
+        return bst
+
+    def test_delete_leaf_node(self):
+        bst = self.get_tree()
+
+        parent = find(bst.root, 9)
+        child = parent.left
+
+        assert parent.left.data == 8
+        assert parent.right.data == 11
+
+        assert child.left is None
+        assert child.right is None
+
+        bst.delete(8)
+
+        assert find(bst.root, 8) is None
+        assert parent.left is None
+        assert parent.right.data == 11
+
+    def test_delete_node_with_one_child(self):
+        bst = self.get_tree()
+
+        parent = find(bst.root, 5)
+        child = parent.left
+
+        assert parent.left.data == 3
+        assert parent.right.data == 7
+
+        assert child.left.data == 1
+        assert child.right is None
+
+        bst.delete(3)
+
+        assert find(bst.root, 3) is None
+        assert parent.left.data == 1
+        assert parent.right.data == 7
+
+    def test_delete_node_with_two_children(self):
+        bst = self.get_tree()
+
+        parent = find(bst.root, 12)
+        child = parent.right
+
+        assert parent.left.data == 5
+        assert parent.right.data == 15
+
+        assert child.left.data == 13
+        assert child.right.data == 17
+
+        bst.delete(15)
+
+        assert find(bst.root, 15) is None
+        assert parent.left.data == 5
+        assert parent.right.data == 17
+
 def test_find_min(bst_full):
-    assert find_min(bst_full.root) == 4
+    assert find_min(bst_full.root).data == 4
 
 def test_find_max(bst_full):
-    assert find_max(bst_full.root) == 25
+    assert find_max(bst_full.root).data == 25
 
 def test_find_height(bst_full):
     assert find_height(bst_full.root) == 3
