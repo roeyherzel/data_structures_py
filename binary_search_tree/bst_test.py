@@ -1,5 +1,5 @@
 from pytest import fixture
-from .bst import BST
+from .bst import BST, find_min, find_max, find_height
 
 
 @fixture
@@ -8,6 +8,18 @@ def bst():
     bst.insert(10)
     yield bst
 
+@fixture
+def bst_full():
+    bst = BST()
+    bst.insert(15)
+    bst.insert(10)
+    bst.insert(20)
+    bst.insert(8)
+    bst.insert(12)
+    bst.insert(17)
+    bst.insert(25)
+    bst.insert(4)
+    yield bst
 
 class TestGeneral:
     def test_root_init_as_none(self):
@@ -70,3 +82,13 @@ class TestSearch:
 
         assert bst.search(15) is True
         assert bst.search(6) is False
+
+
+def test_find_min(bst_full):
+    assert find_min(bst_full.root) == 4
+
+def test_find_max(bst_full):
+    assert find_max(bst_full.root) == 25
+
+def test_find_height(bst_full):
+    assert find_height(bst_full.root) == 3

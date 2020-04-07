@@ -34,14 +34,29 @@ def _search(node, data):
     return _search(node.right, data)
 
 
-def find_min(self):
-    # TODO
-    raise NotImplemented
+def find_min(root):
+    """finds smallest data in the tree"""
+    if not root:
+        raise Exception('tree is empty')
 
-def find_max(self):
-    # TODO
-    raise NotImplemented
+    if not root.left:
+        return root.data
+
+    return find_min(root.left)
+
+def find_max(root):
+    """finds largest data in the tree"""
+    if not root:
+        raise Exception('tree is empty')
+
+    if not root.right:
+        return root.data
+
+    return find_max(root.right)
 
 def find_height(node):
-    # TODO
-    raise NotImplemented
+    """find the height of a given node in the tree"""
+    if not node:
+        return -1; # height of an empty tree
+
+    return max(find_height(node.left), find_height(node.right)) + 1 # 1 edge from node to subtree
