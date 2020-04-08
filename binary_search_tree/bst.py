@@ -102,3 +102,33 @@ def find_height(node: Node) -> int:
         return -1; # height of an empty tree
 
     return max(find_height(node.left), find_height(node.right)) + 1 # 1 edge from node to subtree
+
+def find_successor(root: Node, data) -> Node:
+    """find the next in-order node"""
+    current = find(root, data)
+
+    if not current:
+        return None
+
+    # Case 1: node has right subtree
+    if current.right:
+        return find_min(current.right)
+
+    # Case 2: no right subtree
+    else:
+        successor = None
+        ancessor = root
+
+        while ancessor != current:
+            if current.data < ancessor.data:
+                successor = ancessor
+                ancessor = ancessor.left
+            else:
+                ancessor = ancessor.right
+
+    return successor
+
+
+def find_predecessor(root: Node, data) -> Node:
+    # TODO: find the previous in-order node
+    pass

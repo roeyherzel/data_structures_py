@@ -1,5 +1,5 @@
 from pytest import fixture
-from .bst import BST, find, find_min, find_max, find_height
+from .bst import BST, find, find_min, find_max, find_height, find_successor
 
 
 @fixture
@@ -154,3 +154,30 @@ def test_find_max(bst_full):
 
 def test_find_height(bst_full):
     assert find_height(bst_full.root) == 3
+
+
+class TestFindSuccessor:
+    def get_tree(self):
+        bst = BST()
+        for i in [12,5,15,3,7,13,17,1,9,14,20,8,11,18]:
+            bst.insert(i)
+
+        return bst
+
+    def test_has_right_subtree(self):
+        bst = self.get_tree()
+
+        assert find_successor(bst.root, 9).data == 11
+        assert find_successor(bst.root, 17).data == 18
+
+    def test_no_right_subtree(self):
+        bst = self.get_tree()
+
+        assert find_successor(bst.root, 3).data == 5
+        assert find_successor(bst.root, 8).data == 9
+        assert find_successor(bst.root, 1).data == 3
+
+    def test_no_successor(self):
+        bst = self.get_tree()
+
+        assert find_successor(bst.root, 20) is None
